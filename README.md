@@ -13,10 +13,9 @@ A Python project template for reproducible, easy-to-maintain projects.
 5. [Install Dependencies](#5-install-dependencies)
 6. [Install Pre-Commit Hooks](#6-install-pre-commit-hooks)
 7. [Launch JupyterLab](#7-launch-jupyterlab)
-8. [Run the Example Script](#8-run-the-example-script)
-9. [Run Tests](#9-run-tests)
-10. [Adding New Packages](#10-adding-new-packages)
-11. [Project Layout](#11-project-layout)
+8. [Run Tests](#8-run-tests)
+9. [Adding New Packages](#9-adding-new-packages)
+10. [Project Layout](#10-project-layout)
 
 ---
 
@@ -135,36 +134,25 @@ That's it — the hooks will now run silently in the background every time you c
 uv run jupyter lab
 ```
 
-JupyterLab will open in your browser. Navigate to `notebooks/hello_world.ipynb`
-and run the cells top-to-bottom with **Shift + Enter**.
+JupyterLab will open in your browser. Notebooks for exploration and analysis
+live in `notebooks/`.
 
-Or simply open the notebook from the left panel of VS Code. Select the kernel from the upper right of the notebook. Choose "Select a Python environment" From the upper right of the notebook and choose myproject. (`.venv/bin/python`)
-
----
-
-## 8. Run the Example Script
-
-```bash
-uv run python scripts/hello_world.py
-```
-
-This imports a function from the `myproject` package, generates some sample data,
-and saves a histogram to `hello_world.png`.
+Or simply open a notebook from the left panel of VS Code. Select the kernel from the upper right of the notebook. Choose "Select a Python environment" from the upper right of the notebook and choose fem_engine. (`.venv/bin/python`)
 
 ---
 
-## 9. Run Tests
+## 8. Run Tests
 
 ```bash
 uv run pytest
 ```
 
-Tests live in the `tests/` folder. They verify that the functions in `src/myproject/`
+Tests live in the `tests/` folder. They verify that the functions in `src/fem_engine/`
 work as expected. You don't need to write tests immediately, but the setup is ready when you want to.
 
 ---
 
-## 10. Adding New Packages
+## 9. Adding New Packages
 
 When you want to use a new Python package (e.g., `seaborn`):
 
@@ -193,7 +181,7 @@ get the exact same package versions.
 
 ---
 
-## 11. Project Layout
+## 10. Project Layout
 
 ```
 your-project/
@@ -202,18 +190,14 @@ your-project/
 │                           # big datasets here without worrying about git.
 │
 ├── notebooks/              # Jupyter notebooks for exploration and analysis.
-│   └── hello_world.ipynb
 │
 ├── scripts/                # Standalone Python scripts for running analyses.
-│   └── hello_world.py
 │
 ├── src/
-│   └── myproject/          # The importable Python package.
-│       ├── __init__.py     # Makes `from myproject import ...` work.
-│       └── utils.py        # Shared functions used across notebooks and scripts.
+│   └── fem_engine/          # The importable Python package.
+│       └── __init__.py     # Makes `from fem_engine import ...` work.
 │
-├── tests/                  # Automated tests for the myproject package.
-│   └── test_utils.py
+├── tests/                  # Automated tests for the fem_engine package.
 │
 ├── .gitignore              # Tells git which files to ignore (e.g., .venv/, large data files).
 ├── .pre-commit-config.yaml # Configuration for pre-commit hooks.
@@ -223,13 +207,13 @@ your-project/
 └── uv.lock                 # Exact package versions — always commit this file.
 ```
 
-**The key idea behind `src/myproject/`:** Instead of copying functions between
+**The key idea behind `src/fem_engine/`:** Instead of copying functions between
 notebooks or using messy relative imports (`../../utils.py`), any shared code
-lives in `src/myproject/`. UV installs it as a proper package, so you can write
-`from myproject import my_function` from anywhere — a notebook, a script, or a
+lives in `src/fem_engine/`. UV installs it as a proper package, so you can write
+`from fem_engine import my_function` from anywhere — a notebook, a script, or a
 test — and it just works.
 
 > **What is Hatchling?** You'll see `hatchling` mentioned in `pyproject.toml`.
-> It's the build tool that makes `src/myproject/` installable as a package.
+> It's the build tool that makes `src/fem_engine/` installable as a package.
 > When you run `uv sync`, UV uses Hatchling behind the scenes to register the
-> package so that `import myproject` works. You never interact with it directly.
+> package so that `import fem_engine` works. You never interact with it directly.

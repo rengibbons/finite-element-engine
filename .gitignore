@@ -36,3 +36,7 @@ build/
 
 # Generated outputs
 hello_world.png
+
+# Run outputs — each run writes its own data/output/<run_dir>/, never committed
+data/output/*
+!data/output/.gitkeep
