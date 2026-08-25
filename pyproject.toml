@@ -43,4 +43,6 @@ testpaths = ["tests"]
 [tool.mypy]
 python_version = "3.12"
 strict = true
-files = ["src", "scripts", "tests"]
+# "scripts" omitted: mypy errors on a directory with no .py files, and
+# scripts/ is currently just a placeholder. Re-add once it has real code.
+files = ["src", "tests"]
