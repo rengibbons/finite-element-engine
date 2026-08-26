@@ -21,6 +21,7 @@ dev = [
     "mypy>=1.11",
     "ruff>=0.11",
     "pandas-stubs>=2.0",
+    "scipy-stubs>=1.18.1.0",
 ]
 
 [build-system]
@@ -43,6 +44,9 @@ testpaths = ["tests"]
 [tool.mypy]
 python_version = "3.12"
 strict = true
-# "scripts" omitted: mypy errors on a directory with no .py files, and
-# scripts/ is currently just a placeholder. Re-add once it has real code.
-files = ["src", "tests"]
+files = ["src", "scripts", "tests"]
+
+[[tool.mypy.overrides]]
+# No published type stubs / py.typed marker for these.
+module = ["meshio", "plotly.*"]
+ignore_missing_imports = true

@@ -121,7 +121,9 @@ These standards apply to all code in `src/`, `scripts/`, `notebooks/`, and `test
 
 - Type hints are mandatory on all function signatures, including return types.
 - Prefer `@dataclass(frozen=True, slots=True)` for data — immutable by default.
-  Avoid mutable containers as class attributes.
+  Plain `dict`/`list` fields are fine (don't reach for `MappingProxyType` or
+  similar wrappers) — `frozen=True` already prevents reassigning the field
+  itself, which is the immutability that matters here.
 - Use Pydantic only at I/O boundaries (parsing external input, config, API
   payloads) — not as a general-purpose data class replacement.
 - Prefer sum types (`Enum`, `Literal`, a union of dataclasses) over

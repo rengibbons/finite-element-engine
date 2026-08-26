@@ -1,0 +1,24 @@
+[mesh]
+path = "data/cases/cantilever.msh"
+
+[material]
+model = "linear_elastic"
+young_modulus = 210.0e9
+poisson_ratio = 0.3
+
+[analysis]
+plane_condition = "plane_stress"
+thickness = 0.01
+
+[boundary_conditions.essential]
+fixed_edge = { ux = 0.0, uy = 0.0 }
+
+[boundary_conditions.natural]
+loaded_edge = { traction = [0.0, -1.0e6] }
+
+[solver]
+method = "direct"
+
+[output]
+dir = "data/output"
+run_name = "cantilever_hello_world"
